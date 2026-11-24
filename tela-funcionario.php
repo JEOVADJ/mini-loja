@@ -16,7 +16,7 @@
     <p style="color: green"><?= htmlspecialchars($aviso) ?></p>
   <?php endif; ?>
 
-  <!-- NOVO: já entrou? mostra quem é e o botão de sair -->
+  <!-- já entrou? mostra quem é e o botão de sair -->
   <?php if ($logado): ?>
     <p>Olá, <strong><?= htmlspecialchars($logado) ?></strong>! <a href="cadastro.php">Cadastrar produtos</a> · <a href="funcionario.php?sair=1">Sair</a></p>
   <?php else: ?>
@@ -34,7 +34,9 @@
     </form>
   <?php endif; ?>
 
-  <h2>Cadastrar funcionário</h2>
+  <!-- NOVO: o formulário de cadastro só aparece para quem pode usar -->
+  <?php if ($podeCadastrar): ?>
+  <h2><?= $logado ? 'Cadastrar funcionário' : 'Primeiro acesso: cadastre o administrador' ?></h2>
   <form method="post" action="funcionario.php">
     <input type="hidden" name="acao" value="cadastrar">
 
@@ -49,5 +51,6 @@
 
     <button type="submit">Cadastrar</button>
   </form>
+  <?php endif; ?>
 </body>
 </html>
